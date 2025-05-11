@@ -40,7 +40,7 @@ public class FortressPlayer {
             predicateBuilder.blocks(blockRegistry, Blocks.BLUE_CONCRETE, Blocks.BLUE_TERRACOTTA);
         }
 
-        moduleStack.set(DataComponentTypes.CAN_PLACE_ON, new BlockPredicatesChecker(List.of(predicateBuilder.build()), false));
+        moduleStack.set(DataComponentTypes.CAN_PLACE_ON, new BlockPredicatesChecker(List.of(predicateBuilder.build())));
 
         player.getInventory().insertStack(moduleStack);
     }

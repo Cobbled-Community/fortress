@@ -208,7 +208,7 @@ public class FortressActive {
             BlockPos blockPos = hitResult.getBlockPos();
             Direction direction = hitResult.getSide();
             BlockPos blockPos2 = blockPos.offset(direction);
-            if (world.canPlayerModifyAt(player, hitResult.getBlockPos()) && player.canPlaceOn(blockPos2, direction, stack)) {
+            if (world.canEntityModifyAt(player, hitResult.getBlockPos()) && player.canPlaceOn(blockPos2, direction, stack)) {
                 Cell cell = map.cellManager.getCell(blockPos);
                 StructureTemplate structure = moduleItem.getStructure(gameSpace.getServer());
 
@@ -224,7 +224,7 @@ public class FortressActive {
                 ) {
                     int slot;
                     if (hand == Hand.MAIN_HAND) {
-                        slot = player.getInventory().selectedSlot;
+                        slot = player.getInventory().getSelectedSlot();
                     } else {
                         slot = 40; // offhand
                     }

@@ -6,14 +6,16 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BannerPatternsComponent;
 import net.minecraft.component.type.DyedColorComponent;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
-import net.minecraft.component.type.UnbreakableComponent;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.predicate.BlockPredicate;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Unit;
 import us.potatoboy.fortress.custom.item.FortressModules;
 import us.potatoboy.fortress.custom.item.ModuleItem;
 import us.potatoboy.fortress.game.FortressTeams;
@@ -75,22 +77,13 @@ public class FortressKit {
         ItemStack boots = new ItemStack(Items.LEATHER_BOOTS);
         var registry = playerEntity.getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT);
         ItemEnchantmentsComponent.Builder builder = new ItemEnchantmentsComponent.Builder(
-                boots.get(DataComponentTypes.ENCHANTMENTS).withShowInTooltip(false)
+                boots.get(DataComponentTypes.ENCHANTMENTS)
         );
         builder.add(registry.getOrThrow(Enchantments.FEATHER_FALLING), 5);
         boots.set(DataComponentTypes.ENCHANTMENTS, builder.build());
-        boots.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(teams.getConfig(team).dyeColor().getRgb(), false));
+        boots.set(DataComponentTypes.DYED_COLOR, new DyedColorComponent(teams.getConfig(team).dyeColor().getRgb()));
 
-        ItemStack[] armorStacks = new ItemStack[]{
-                boots,
-                new ItemStack(Items.AIR),
-                new ItemStack(Items.AIR),
-                new ItemStack(Items.AIR)
-        };
-
-        for (int i = 0; i < armorStacks.length; i++) {
-            playerEntity.getInventory().armor.set(i, armorStacks[i]);
-        }
+        playerEntity.equipStack(EquipmentSlot.FEET, boots);
     }
 
     public void giveItems(ServerPlayerEntity playerEntity, GameTeamKey team) {
@@ -108,24 +101,24 @@ public class FortressKit {
             if (entry.getKey() instanceof BowItem) {
                 var registry = playerEntity.getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT);
                 ItemEnchantmentsComponent.Builder builder = new ItemEnchantmentsComponent.Builder(
-                        itemStack.get(DataComponentTypes.ENCHANTMENTS).withShowInTooltip(false)
+                        itemStack.get(DataComponentTypes.ENCHANTMENTS)
                 );
                 builder.add(registry.getOrThrow(Enchantments.INFINITY), 1);
                 itemStack.set(DataComponentTypes.ENCHANTMENTS, builder.build());
             }
 
-            if (entry.getKey() instanceof PickaxeItem) {
+            if (entry.getKey().getRegistryEntry().isIn(ItemTags.PICKAXES)) {
                 itemStack.set(DataComponentTypes.CAN_BREAK, new BlockPredicatesChecker(List.of(
                         BlockPredicate.Builder.create()
                                 .tag(world.getRegistryManager().getOrThrow(RegistryKeys.BLOCK), BlockTags.PLANKS)
                                 .build()
-                ), false));
+                )));
             }
 
-            itemStack.set(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false));
+            itemStack.set(DataComponentTypes.UNBREAKABLE, Unit.INSTANCE);
 
             if (entry.getKey() instanceof ShieldItem) {
-                playerEntity.getInventory().offHand.set(0, itemStack);
+                playerEntity.equipStack(EquipmentSlot.OFFHAND, itemStack);
             } else {
                 playerEntity.getInventory().insertStack(itemStack);
             }
