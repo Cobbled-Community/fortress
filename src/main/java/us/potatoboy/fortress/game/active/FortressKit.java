@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.block.entity.BannerPatterns;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BannerPatternsComponent;
+import net.minecraft.component.type.BlockPredicatesComponent;
 import net.minecraft.component.type.DyedColorComponent;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantments;
@@ -108,7 +109,7 @@ public class FortressKit {
             }
 
             if (entry.getKey().getRegistryEntry().isIn(ItemTags.PICKAXES)) {
-                itemStack.set(DataComponentTypes.CAN_BREAK, new BlockPredicatesChecker(List.of(
+                itemStack.set(DataComponentTypes.CAN_BREAK, new BlockPredicatesComponent(List.of(
                         BlockPredicate.Builder.create()
                                 .tag(world.getRegistryManager().getOrThrow(RegistryKeys.BLOCK), BlockTags.PLANKS)
                                 .build()

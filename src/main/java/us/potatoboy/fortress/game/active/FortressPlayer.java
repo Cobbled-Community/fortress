@@ -2,7 +2,7 @@ package us.potatoboy.fortress.game.active;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.item.BlockPredicatesChecker;
+import net.minecraft.component.type.BlockPredicatesComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.BlockPredicate;
 import net.minecraft.registry.RegistryKeys;
@@ -40,7 +40,7 @@ public class FortressPlayer {
             predicateBuilder.blocks(blockRegistry, Blocks.BLUE_CONCRETE, Blocks.BLUE_TERRACOTTA);
         }
 
-        moduleStack.set(DataComponentTypes.CAN_PLACE_ON, new BlockPredicatesChecker(List.of(predicateBuilder.build())));
+        moduleStack.set(DataComponentTypes.CAN_PLACE_ON, new BlockPredicatesComponent(List.of(predicateBuilder.build())));
 
         player.getInventory().insertStack(moduleStack);
     }
