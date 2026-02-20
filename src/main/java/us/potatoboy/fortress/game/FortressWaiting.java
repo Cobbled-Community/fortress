@@ -18,7 +18,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.GameMode;
-import net.minecraft.world.GameRules;
+import net.minecraft.world.rule.GameRules;
 import us.potatoboy.fortress.game.active.FortressActive;
 import us.potatoboy.fortress.game.map.FortressMap;
 import us.potatoboy.fortress.game.map.FortressMapGenerator;
@@ -61,10 +61,9 @@ public class FortressWaiting {
     public static GameOpenProcedure open(GameOpenContext<FortressConfig> context) {
         FortressMapGenerator generator = new FortressMapGenerator(context.config().mapConfig());
         FortressMap map = generator.create(context.server());
-
         RuntimeWorldConfig worldConfig = new RuntimeWorldConfig()
                 .setGenerator(map.asGenerator(context.server()))
-                .setGameRule(GameRules.NATURAL_REGENERATION, false);
+                .setGameRule(GameRules.NATURAL_HEALTH_REGENERATION, false);
 
         return context.openWithWorld(worldConfig, (game, world) -> {
             GameWaitingLobby.addTo(game, context.config().playerConfig());

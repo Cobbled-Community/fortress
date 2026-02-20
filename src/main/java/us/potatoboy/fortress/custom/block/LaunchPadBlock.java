@@ -7,6 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -31,7 +33,7 @@ public class LaunchPadBlock extends Block implements PolymerBlock {
             entity.setVelocity(velocity);
             if (entity instanceof ServerPlayerEntity player) {
                 player.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(entity));
-                player.playSoundToPlayer(SoundEvents.BLOCK_SLIME_BLOCK_PLACE, SoundCategory.BLOCKS, 0.5f, 1);
+                player.networkHandler.sendPacket(new PlaySoundS2CPacket(RegistryEntry.of(SoundEvents.BLOCK_SLIME_BLOCK_PLACE), SoundCategory.BLOCKS, pos.getX(), pos.getY(), pos.getZ(), 0.5f, 1, world.getRandom().nextLong()));
             }
         }
     }

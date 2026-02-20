@@ -14,10 +14,13 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -31,6 +34,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 import us.potatoboy.fortress.Fortress;
 import us.potatoboy.fortress.FortressStatistics;
@@ -332,10 +336,12 @@ public class FortressActive {
             if (participants.containsKey(PlayerRef.of(player))) {
                 var participant = getParticipant(player);
                 if (participant.team == winTeam.key()) {
-                    player.playSoundToPlayer(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundCategory.MASTER, 1.0F, 1.0F);
+                    Vec3d pos = player.getEntityPos();
+                    player.networkHandler.sendPacket(new PlaySoundS2CPacket(RegistryEntry.of(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE), SoundCategory.MASTER, pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F, world.getRandom().nextLong()));
                     this.statistics.forPlayer(player).increment(StatisticKeys.GAMES_WON, 1);
                 } else {
-                    player.playSoundToPlayer(SoundEvents.ENTITY_DONKEY_DEATH, SoundCategory.MASTER, 1.0F, 1.0F);
+                    Vec3d pos = player.getEntityPos();
+                    player.networkHandler.sendPacket(new PlaySoundS2CPacket(RegistryEntry.of(SoundEvents.ENTITY_DONKEY_DEATH), SoundCategory.MASTER, pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F, world.getRandom().nextLong()));
                     this.statistics.forPlayer(player).increment(StatisticKeys.GAMES_LOST, 1);
                 }
             }
@@ -388,9 +394,9 @@ public class FortressActive {
         for (int i = 0; i < 75; i++) {
             world.spawnParticles(
                     ParticleTypes.FIREWORK,
-                    playerEntity.getPos().getX(),
-                    playerEntity.getPos().getY() + 1.0f,
-                    playerEntity.getPos().getZ(),
+                    playerEntity.getEntityPos().getX(),
+                    playerEntity.getEntityPos().getY() + 1.0f,
+                    playerEntity.getEntityPos().getZ(),
                     1,
                     ((playerEntity.getRandom().nextFloat() * 2.0f) - 1.0f) * 0.35f,
                     ((playerEntity.getRandom().nextFloat() * 2.0f) - 1.0f) * 0.35f,
