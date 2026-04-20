@@ -9,7 +9,7 @@ import us.potatoboy.fortress.custom.block.FortressBlocks;
 import us.potatoboy.fortress.custom.item.FortressModules;
 import us.potatoboy.fortress.game.FortressConfig;
 import us.potatoboy.fortress.game.FortressWaiting;
-import xyz.nucleoid.plasmid.api.game.GameType;
+import xyz.nucleoid.plasmid.api.game.GameTypes;
 
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -22,7 +22,7 @@ public class Fortress implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        GameType.register(
+        GameTypes.register(
                 identifier("fortress"),
                 FortressConfig.CODEC,
                 FortressWaiting::open
