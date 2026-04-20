@@ -2,9 +2,9 @@ package us.potatoboy.fortress;
 
 import com.google.common.reflect.Reflection;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.text.Style;
-import net.minecraft.text.TextColor;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.resources.Identifier;
 import us.potatoboy.fortress.custom.block.FortressBlocks;
 import us.potatoboy.fortress.custom.item.FortressModules;
 import us.potatoboy.fortress.game.FortressConfig;
@@ -33,6 +33,6 @@ public class Fortress implements ModInitializer {
     }
 
     public static Identifier identifier(String value) {
-        return Identifier.of(ID, value);
+        return Identifier.fromNamespaceAndPath(ID, value);
     }
 }
