@@ -134,7 +134,7 @@ public class Cell {
 
             Block block = state.getBlock();
 
-            if (block == Blocks.RED_CONCRETE || block == Blocks.BLUE_CONCRETE) {
+            if (block == Blocks.CONCRETE.red() || block == Blocks.CONCRETE.blue()) {
                 level.setBlockAndUpdate(blockPos, pallet.primary().defaultBlockState());
             }
         });

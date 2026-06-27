@@ -1,7 +1,7 @@
 package us.potatoboy.fortress.game.active;
 
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Tuple;
+import us.potatoboy.fortress.utility.Tuple;
 import us.potatoboy.fortress.game.FortressConfig;
 import us.potatoboy.fortress.game.FortressTeams;
 import xyz.nucleoid.plasmid.api.game.common.team.GameTeam;

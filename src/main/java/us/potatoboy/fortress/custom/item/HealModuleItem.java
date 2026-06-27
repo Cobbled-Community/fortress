@@ -22,7 +22,7 @@ import xyz.nucleoid.plasmid.api.util.PlayerRef;
 
 public class HealModuleItem extends ModuleItem {
     public HealModuleItem(Item.Properties settings, Identifier structure) {
-        super(settings, Items.PINK_STAINED_GLASS, structure);
+        super(settings, Items.STAINED_GLASS.pink(), structure);
     }
 
     @Override

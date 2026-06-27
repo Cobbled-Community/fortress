@@ -2,7 +2,7 @@ package us.potatoboy.fortress.game.map;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Tuple;
+import us.potatoboy.fortress.utility.Tuple;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.chunk.ChunkGenerator;

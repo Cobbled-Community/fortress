@@ -7,7 +7,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Tuple;
+import us.potatoboy.fortress.utility.Tuple;
 import net.minecraft.world.level.GameType;
 import us.potatoboy.fortress.Fortress;
 import us.potatoboy.fortress.FortressStatistics;

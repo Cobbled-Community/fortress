@@ -1,10 +1,10 @@
 package us.potatoboy.fortress.game.active;
 
+import net.minecraft.advancements.predicates.BlockPredicate;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.AdventureModePredicate;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.advancements.criterion.BlockPredicate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
@@ -35,9 +35,9 @@ public class FortressPlayer {
 
         BlockPredicate.Builder predicateBuilder = BlockPredicate.Builder.block();
         if (team == FortressTeams.RED.key()) {
-            predicateBuilder.of(blockRegistry, Blocks.RED_CONCRETE, Blocks.RED_TERRACOTTA);
+            predicateBuilder.of(blockRegistry, Blocks.CONCRETE.red(), Blocks.DYED_TERRACOTTA.red());
         } else {
-            predicateBuilder.of(blockRegistry, Blocks.BLUE_CONCRETE, Blocks.BLUE_TERRACOTTA);
+            predicateBuilder.of(blockRegistry, Blocks.CONCRETE.blue(), Blocks.DYED_TERRACOTTA.blue());
         }
 
         moduleStack.set(DataComponents.CAN_PLACE_ON, new AdventureModePredicate(List.of(predicateBuilder.build())));

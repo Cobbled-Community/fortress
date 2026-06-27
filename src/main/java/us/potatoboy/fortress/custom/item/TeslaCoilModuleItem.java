@@ -19,7 +19,7 @@ import xyz.nucleoid.plasmid.api.util.PlayerRef;
 
 public class TeslaCoilModuleItem extends ModuleItem {
     public TeslaCoilModuleItem(Item.Properties settings, Identifier structure) {
-        super(settings, Items.LIGHTNING_ROD, structure);
+        super(settings, Items.LIGHTNING_ROD.waxed().unaffected(), structure);
     }
 
     @Override

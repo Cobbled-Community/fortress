@@ -1,6 +1,7 @@
 package us.potatoboy.fortress.game.active;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import net.minecraft.advancements.predicates.BlockPredicate;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -113,7 +114,7 @@ public class FortressKit {
 
             if (entry.getKey().builtInRegistryHolder().is(ItemTags.PICKAXES)) {
                 itemStack.set(DataComponents.CAN_BREAK, new AdventureModePredicate(List.of(
-                        net.minecraft.advancements.criterion.BlockPredicate.Builder.block()
+                        BlockPredicate.Builder.block()
                                 .of(level.registryAccess().lookupOrThrow(Registries.BLOCK), BlockTags.PLANKS)
                                 .build()
                 )));

@@ -30,17 +30,17 @@ public class FortressTeams {
     );
 
     public static final TeamPallet RED_PALLET = new TeamPallet(
-            Blocks.RED_CONCRETE,
-            Blocks.RED_TERRACOTTA,
-            Blocks.RED_STAINED_GLASS,
+            Blocks.CONCRETE.red(),
+            Blocks.DYED_TERRACOTTA.red(),
+            Blocks.STAINED_GLASS.red(),
             Blocks.CRIMSON_PLANKS,
             Blocks.CRIMSON_STAIRS,
             Blocks.CRIMSON_SLAB
     );
     public static final TeamPallet BLUE_PALLET = new TeamPallet(
-            Blocks.BLUE_CONCRETE,
-            Blocks.BLUE_TERRACOTTA,
-            Blocks.BLUE_STAINED_GLASS,
+            Blocks.CONCRETE.blue(),
+            Blocks.DYED_TERRACOTTA.blue(),
+            Blocks.STAINED_GLASS.blue(),
             Blocks.WARPED_PLANKS,
             Blocks.WARPED_STAIRS,
             Blocks.WARPED_SLAB

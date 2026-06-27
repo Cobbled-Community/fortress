@@ -6,7 +6,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Tuple;
+import us.potatoboy.fortress.utility.Tuple;
 import net.minecraft.core.BlockPos;
 import xyz.nucleoid.map_templates.BlockBounds;
 import xyz.nucleoid.plasmid.api.game.GameOpenException;
@@ -82,12 +82,12 @@ public class CellManager {
 
     public BlockState getTeamGlass(GameTeam team) {
         if (team == FortressTeams.RED) {
-            return Blocks.RED_STAINED_GLASS.defaultBlockState();
+            return Blocks.STAINED_GLASS.red().defaultBlockState();
         } else if (team == FortressTeams.BLUE) {
-            return Blocks.BLUE_STAINED_GLASS.defaultBlockState();
+            return Blocks.STAINED_GLASS.blue().defaultBlockState();
         }
 
-        return Blocks.LIGHT_GRAY_STAINED_GLASS.defaultBlockState();
+        return Blocks.STAINED_GLASS.lightGray().defaultBlockState();
     }
 
     public BlockState getTeamBlock(GameTeamKey team, BlockPos pos) {
